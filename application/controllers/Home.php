@@ -222,7 +222,7 @@ class Home extends CI_Controller {
 		$this->load->view('view_home', $dados);
 	}
 
-	public function atualizausuario(){
+	public function atualiza_usuario(){
 		if (controleAcessoMenuUsuarios()){
 		
 			/*$this->load->library('form_validation');

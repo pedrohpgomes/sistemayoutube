@@ -112,28 +112,28 @@ class Model_usuario extends CI_Model{
 			$dadosAtualiza = array();
 			$usuario_bd = $this->consultaUsuarioById($dadosUsuario['id']);
 			if ($dadosUsuario['nome'] != $usuario_bd->nome && $dadosUsuario['nome'] != null){
-				//$dadosAtualiza['nome'] = $dadosUsuario['nome'];
-				$this->db->set('nome',$dadosUsuario['nome']);
+				$dadosAtualiza['nome'] = $dadosUsuario['nome'];
+				//$this->db->set('nome',$dadosUsuario['nome']);
 			}
 			if ($dadosUsuario['login'] != $usuario_bd->login && $dadosUsuario['login'] != null){
-				//$dadosAtualiza['login'] = $dadosUsuario['login'];
-				$this->db->set('login',$dadosUsuario['login']);
+				$dadosAtualiza['login'] = $dadosUsuario['login'];
+				//$this->db->set('login',$dadosUsuario['login']);
 			}
 			if ($dadosUsuario['email'] != $usuario_bd->email && $dadosUsuario['email'] != null){
-				//$dadosAtualiza['email'] = $dadosUsuario['email'];
-				$this->db->set('email',$dadosUsuario['email']);
+				$dadosAtualiza['email'] = $dadosUsuario['email'];
+				//$this->db->set('email',$dadosUsuario['email']);
 			}
 			if ($dadosUsuario['senha'] != $usuario_bd->senha && $dadosUsuario['senha'] != null){
-				//$dadosAtualiza['senha'] = $dadosUsuario['senha'];
-				$this->db->set('senha',$dadosUsuario['senha']);
+				$dadosAtualiza['senha'] = $dadosUsuario['senha'];
+				//$this->db->set('senha',$dadosUsuario['senha']);
 			}
 			if ($dadosUsuario['perfilid'] != $usuario_bd->perfilid && $dadosUsuario['perfilid'] != null){
-				//$dadosAtualiza['perfilid'] = $dadosUsuario['perfilid'];
-				$this->db->set('perfilid',$dadosUsuario['perfilid']);
+				$dadosAtualiza['perfilid'] = $dadosUsuario['perfilid'];
+				//$this->db->set('perfilid',$dadosUsuario['perfilid']);
 			}
-			if(isset($this->db->set)){
+			if(!empty($dadosAtualiza)){
 				$this->db->where('id',$dadosUsuario['id']);
-				$this->db->update('usuarios');
+				$this->db->update('usuarios',$dadosAtualiza);
 				return true;
 			}
 		}

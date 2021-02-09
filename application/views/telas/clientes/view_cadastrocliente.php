@@ -33,34 +33,21 @@
                 <div class="box-body">
 
                   <div class="form-group">
-                    <label for="razaoSocial" class="col-sm-2 control-label">Razão Social</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="razaoSocial" name="razaoSocial" placeholder="Informa a Razão Social" value="<?php echo set_value('razaoSocial')?>">
-                    </div>
-                  </div><!-- ./ form-group -->
-                  <div class="form-group">
-                    <label for="nomeFantasia" class="col-sm-2 control-label">Nome Fantasia</label>
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="nomeFantasia" name="nomeFantasia" placeholder="Informe o nome fantasia do cliente" value="<?php echo set_value('nomeFantasia')?>">
-                    </div>
-                  </div><!-- ./ form-group -->
-
-                  <div class="form-group">
                     <label for="tipoCliente" class="col-sm-2 control-label">Tipo de Cliente</label>
                     <div class="col-sm-5">
-                      <input type="radio" class="flat-red" id="pf">
+                      <input type="radio" class="flat-red" id="pf" onclick="checked_cpf()">
                       <label for="pf" class="control-label">&nbsp;&nbsp;Pessoa Física</label>
                     </div>
                     <div class="col-sm-5">
-                      <input type="radio" class="flat-red" id="pj">
+                      <input type="radio" class="flat-red" id="pj" onclick="checked_cnpj()">
                       <label for="pj" class="control-label">&nbsp;&nbsp;Pessoa Jurídica</label>
                     </div>
                   </div><!-- ./ form-group -->
 
                   <div class="form-group">
-                    <label for="cnpj" class="col-sm-2 control-label">CNPJ</label>
+                    <label for="nome" class="col-sm-2 control-label">Nome</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="cnpj" name="cnpj" placeholder="Ex: 18.888.888/0008-88" value="<?php echo set_value('cnpj')?>">
+                      <input type="text" class="form-control" id="nome" name="nome" placeholder="Informe o nome" value="<?php echo set_value('nome')?>" readonly="readonly">
                     </div>
                   </div><!-- ./ form-group -->
 
@@ -68,6 +55,26 @@
                     <label for="cpf" class="col-sm-2 control-label">CPF</label>
                     <div class="col-sm-10">
                       <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Ex:  999.999.999-99" value="<?php echo set_value('cnpj')?>" readonly="readonly">
+                    </div>
+                  </div><!-- ./ form-group -->
+
+                  <div class="form-group">
+                    <label for="razaoSocial" class="col-sm-2 control-label">Razão Social</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="razaoSocial" name="razaoSocial" placeholder="Informe a Razão Social" value="<?php echo set_value('razaoSocial')?>">
+                    </div>
+                  </div><!-- ./ form-group -->
+                  <div class="form-group">
+                    <label for="nomeFantasia" class="col-sm-2 control-label">Nome Fantasia</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="nomeFantasia" name="nomeFantasia" placeholder="Informe o nome fantasia do cliente" value="<?php echo set_value('nomeFantasia')?>">
+                    </div>
+                  </div><!-- ./ form-group -->                  
+
+                  <div class="form-group">
+                    <label for="cnpj" class="col-sm-2 control-label">CNPJ</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="cnpj" name="cnpj" placeholder="Ex: 18.888.888/0008-88" value="<?php echo set_value('cnpj')?>">
                     </div>
                   </div><!-- ./ form-group -->
 
@@ -238,4 +245,35 @@
           }
         });//end $("#cep").blur(function()
       });//end $(document).ready(function()
+    </script>
+    <script>
+      $(document).ready(function(){
+
+      });
+      document.getElementById('pj').checked = true;
+
+      function checked_cnpj(){
+        $("#pf").prop("checked", false);
+        $("#cpf").prop("disabled", true);
+        $("#cpf").prop("readonly", true);
+        $("#nome").prop("disabled", true);
+        $("#nome").prop("readonly", true);
+        $("#cnpj").prop("disabled", false);
+        $("#razaoSocial").prop("disabled", false);
+        $("#nomeFantasia").prop("disabled", false);
+
+      }
+
+      function checked_cpf(){
+        $("#pj").prop("checked", false);
+        $("#cpf").prop("disabled", false);
+        $("#cpf").prop("readonly", false);
+        $("#nome").prop("disabled", false);
+        $("#nome").prop("readonly", false);
+
+        $("#razaoSocial").prop("disabled", true);
+        $("#nomeFantasia").prop("disabled", true);
+        $("#cnpj").prop("disabled", true);
+      }
+
     </script>

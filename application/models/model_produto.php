@@ -84,58 +84,46 @@ class Model_produto extends CI_Model{
 			$dadosAtualiza = array();
 			$produto_bd = $this->consultaProdutoById($dadosProduto['id']);
 			if ($dadosProduto['descricao'] != $produto_bd->descricao && $dadosProduto['descricao'] != null){
-				//$dadosAtualiza['descricao'] = $dadosProduto['descricao'];
-				$this->db->set('descricao',$dadosProduto['descricao']);
+				//$this->db->set('descricao',$dadosProduto['descricao']);
 				$dadosAtualiza['descricao'] = $dadosProduto['descricao'];
 			}
-			if ($dadosProduto['unidade'] != $produto_bd->unidade && $dadosProduto['unidade'] != null){
-				//$dadosAtualiza['descricao'] = $dadosProduto['descricao'];
-				$this->db->set('unidade',$dadosProduto['unidade']);
+			if (($dadosProduto['unidade'] != $produto_bd->unidade) && $dadosProduto['unidade'] != null){
+				//$this->db->set('unidade',$dadosProduto['unidade']);
 				$dadosAtualiza['unidade'] = $dadosProduto['unidade'];
 			}
 			if ($dadosProduto['precocusto'] != $produto_bd->precocusto && $dadosProduto['precocusto'] != null){
-				//$dadosAtualiza['descricao'] = $dadosProduto['descricao'];
-				$this->db->set('precocusto',$dadosProduto['precocusto']);
+				//$this->db->set('precocusto',$dadosProduto['precocusto']);
 				$dadosAtualiza['precocusto'] = $dadosProduto['precocusto'];
 			}
 			if ($dadosProduto['precovenda'] != $produto_bd->precovenda && $dadosProduto['precovenda'] != null){
-				//$dadosAtualiza['descricao'] = $dadosProduto['descricao'];
-				$this->db->set('precovenda',$dadosProduto['precovenda']);
+				//$this->db->set('precovenda',$dadosProduto['precovenda']);
 				$dadosAtualiza['precovenda'] = $dadosProduto['precovenda'];
 			}
 			if ($dadosProduto['qtdestoque'] != $produto_bd->qtdestoque && $dadosProduto['qtdestoque'] != null){
-				//$dadosAtualiza['descricao'] = $dadosProduto['descricao'];
-				$this->db->set('qtdestoque',$dadosProduto['qtdestoque']);
+				//$this->db->set('qtdestoque',$dadosProduto['qtdestoque']);
 				$dadosAtualiza['qtdestoque'] = $dadosProduto['qtdestoque'];
 			}
 			if ($dadosProduto['descontopermitido'] != $produto_bd->descontopermitido && $dadosProduto['descontopermitido'] != null){
-				//$dadosAtualiza['descricao'] = $dadosProduto['descricao'];
-				$this->db->set('descontopermitido',$dadosProduto['descontopermitido']);
+				//$this->db->set('descontopermitido',$dadosProduto['descontopermitido']);
 				$dadosAtualiza['descontopermitido'] = $dadosProduto['descontopermitido'];
 			}
 			if ($dadosProduto['alertaestoque'] != $produto_bd->alertaestoque && $dadosProduto['alertaestoque'] != null){
-				//$dadosAtualiza['descricao'] = $dadosProduto['descricao'];
-				$this->db->set('alertaestoque',$dadosProduto['alertaestoque']);
+				//$this->db->set('alertaestoque',$dadosProduto['alertaestoque']);
 				$dadosAtualiza['alertaestoque'] = $dadosProduto['alertaestoque'];
 			}
 			if ($dadosProduto['qtdvendaminima'] != $produto_bd->qtdvendaminima && $dadosProduto['qtdvendaminima'] != null){
-				//$dadosAtualiza['descricao'] = $dadosProduto['descricao'];
-				$this->db->set('qtdvendaminima',$dadosProduto['qtdvendaminima']);
+				//$this->db->set('qtdvendaminima',$dadosProduto['qtdvendaminima']);
 				$dadosAtualiza['qtdvendaminima'] = $dadosProduto['qtdvendaminima'];
 			}
 			if ($dadosProduto['qtdvalorminimo'] != $produto_bd->qtdvalorminimo && $dadosProduto['qtdvalorminimo'] != null){
-				//$dadosAtualiza['descricao'] = $dadosProduto['descricao'];
-				$this->db->set('qtdvalorminimo',$dadosProduto['qtdvalorminimo']);
+				//$this->db->set('qtdvalorminimo',$dadosProduto['qtdvalorminimo']);
 				$dadosAtualiza['qtdvalorminimo'] = $dadosProduto['qtdvalorminimo'];
 			}
-
-			echo "<pre>";print_r($dadosAtualiza);
-			if(isset($this->db->set)){
+			if(!empty($dadosAtualiza)){
 				$this->db->where('id',$dadosProduto['id']);
-				$this->db->update('produto');
+				$this->db->update('produto',$dadosAtualiza);
 				return true;
 			}
-			echo "dasfasdasdasdsadas";
 		}
 		return false;
 	}
