@@ -247,6 +247,7 @@
       });//end $(document).ready(function()
     </script>
     <script>
+      //script para habilitar/desabilitar campos para CNPJ ou CPF
       $(document).ready(function(){
 
       });

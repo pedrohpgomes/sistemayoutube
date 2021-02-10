@@ -142,14 +142,24 @@ class Model_usuario extends CI_Model{
 	}
 
 	//////////FAZER DEPOIS /////////////////////
-	public function verificaUsuarioUnique($dados = null,$id=null){
-		//verifica se os campos da tabela usuarios são únicos,excluindo o ID atual da verificacao
+	public function verificaUnique($tabela,$campo,$valor,$id=null){
+		//verifica se o campo na tabela é único,excluindo o ID atual da verificacao
 		//campos de login, e email
 
-		$query = "select * from {$tabela} where";
-		$this->db->select('*');
-		$this->db->from($tabela);
-		$this->db->except;
+		//$sql = "select * from {$tabela} where {$campo} = '{$valor}'";//sintaxe para SQLServer
+		$sql = "SELECT * FROM {$tabela} WHERE {$campo} = '{$valor}'";//sintaxe para MySQL do PhpMyAdmin
+		if ($id != null){
+			//$sql = $sql." except select * from {$tabela} where id = {$id} ";sintaxe para SQLServer
+			$sql = $sql." and id NOT IN ({$id})"; //sintaxe para MySQL do PhpMyAdmin
+		}
+		
+		$query = $this->db->query($sql);
+		if ($query->num_rows() >= 1){
+			return $query->result();
+			//echo "$campo -> $valor ---- não é único";
+		}
+		return false;
+		//echo "$campo -> $valor ---- é único";		
 	}
 
 
