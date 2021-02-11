@@ -13,6 +13,7 @@ class Home extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->library('form_validation');
+		$this->load->library('encryption');
 		date_default_timezone_set('America/Bahia');
 
 	}
@@ -271,6 +272,54 @@ class Home extends CI_Controller {
 				$dados['msg_tipo'] = 'erro';
 				$this->load->view('view_home', $dados);
 			}
+		} else {
+			$dados['msg'] = "Você não tem permissão para executar esta ação.";
+			$dados['msg_tipo'] = 'erro';
+			$this->load->view('view_home', $dados);
+
+		}
+	}
+
+	public function profile(){
+		if (controleAcessoMenuProfile()){
+		
+			$this->load->library('form_validation');
+			$this->form_validation->set_message('required','Campo %s obrigatório');
+			$this->form_validation->set_message('valid_email','informe um %s válido');
+			$this->form_validation->set_message('is_unique',' %s já cadastrado');
+			$this->form_validation->set_rules('nome', 'nome', 'required');
+			$this->form_validation->set_rules('login', 'login', 'trim|required|is_unique[usuarios.login]');
+			$this->form_validation->set_rules('email', 'email', 'trim|required|valid_email|is_unique[usuarios.email]');
+			$this->form_validation->set_rules('idPerfil', 'perfil de usuário', 'trim|required');
+			$this->form_validation->set_rules('password', 'senha', 'trim|required|callback_check_password');
+			
+			if($this->input->post()){
+				if ($this->form_validation->run() == TRUE){
+					$usuario['nome'] = $this->input->post('nome');
+					$usuario['login'] = $this->input->post('login');
+					$usuario['email'] = $this->input->post('email');
+					$usuario['senha'] = $this->input->post('password');
+					$usuario['datacadastro'] = date("Y-m-d h:i:s");
+					$usuario['perfilid'] = $this->input->post('idPerfil');
+					//status = 1 por default;
+
+					$this->load->model('model_usuario');
+					$resultado = $this->model_usuario->cadastraUsuario($usuario);
+					if($resultado){
+						//$dados['tela'] = 'view_dashboard';
+						$dados['msg'] = "Usuário cadastrado com sucesso";
+						$dados['msg_tipo'] = 'sucesso';
+					}else{
+						$dados['msg'] = "Erro ao cadastrar usuário!";
+						$dados['msg_tipo'] = 'erro';
+					}					
+				}
+			}
+			$this->load->model('model_perfil');
+			$dados['telaAtiva'] = 'usuarios';
+			$dados['resultadoPerfil'] = $this->model_perfil->buscaPerfilCadastro();
+			$dados['tela'] = 'usuarios/view_cadastrousuario';
+			$this->load->view('view_home', $dados);
 		} else {
 			$dados['msg'] = "Você não tem permissão para executar esta ação.";
 			$dados['msg_tipo'] = 'erro';

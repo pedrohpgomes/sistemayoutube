@@ -71,6 +71,7 @@
 				$this->load->view('template/footer');
 				$this->load->view('template/controlbar');
 				$this->load->view('template/js');
+
 			?>
 		</div>
 		<!-- ./wrapper -->

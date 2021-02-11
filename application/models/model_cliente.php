@@ -79,36 +79,64 @@ class Model_cliente extends CI_Model{
 
 		if ($dadosCliente != null){
 			$dadosAtualiza = array();
-			$cliente_bd = $this->consultaUsuarioById($dadosUsuario['id']);
-			if(isset($dadosCliente['cpf'])){
-				if ($dadosCliente['cpf'] != $cliente_bd->cpf && $dadosCliente['cpf'] != null){
-					$dadosAtualiza['cpf'] = $dadosCliente['cpf'];
-				}
-				if ($dadosCliente['nome'] != $cliente_bd->nome && $dadosCliente['nome'] != null){
-					$dadosAtualiza['nome'] = $dadosCliente['nome'];
-				}
+			$cliente_bd = $this->consultaClienteById($dadosCliente['id']);
+			if(!empty($dadosCliente['cpf'])){
+				$dadosAtualiza['cnpj'] = null;
+				$dadosAtualiza['razaoSocial'] = null;
+				$dadosAtualiza['nomeFantasia'] = null;
 			}
-			
-			
-			if ($dadosCliente['login'] != $usuario_bd->login && $dadosUsuario['login'] != null){
-				$dadosAtualiza['login'] = $dadosUsuario['login'];
-				//$this->db->set('login',$dadosUsuario['login']);
+			if(!empty($dadosCliente['cnpj'])){
+				$dadosAtualiza['nome'] = null;
+				$dadosAtualiza['cpf'] = null;
 			}
-			if ($dadosUsuario['email'] != $usuario_bd->email && $dadosUsuario['email'] != null){
-				$dadosAtualiza['email'] = $dadosUsuario['email'];
-				//$this->db->set('email',$dadosUsuario['email']);
+			if ($dadosCliente['cpf'] != $cliente_bd->cpf && $dadosCliente['cpf'] != null){
+				$dadosAtualiza['cpf'] = $dadosCliente['cpf'];
+
 			}
-			if ($dadosUsuario['senha'] != $usuario_bd->senha && $dadosUsuario['senha'] != null){
-				$dadosAtualiza['senha'] = $dadosUsuario['senha'];
-				//$this->db->set('senha',$dadosUsuario['senha']);
+			if ($dadosCliente['cnpj'] != $cliente_bd->cnpj && $dadosCliente['cnpj'] != null){
+				$dadosAtualiza['cnpj'] = $dadosCliente['cnpj'];
 			}
-			if ($dadosUsuario['perfilid'] != $usuario_bd->perfilid && $dadosUsuario['perfilid'] != null){
-				$dadosAtualiza['perfilid'] = $dadosUsuario['perfilid'];
-				//$this->db->set('perfilid',$dadosUsuario['perfilid']);
+			if ($dadosCliente['razaoSocial'] != $cliente_bd->razaoSocial && $dadosCliente['razaoSocial'] != null){
+				$dadosAtualiza['razaoSocial'] = $dadosCliente['razaoSocial'];
 			}
+			if ($dadosCliente['nomeFantasia'] != $cliente_bd->nomeFantasia && $dadosCliente['nomeFantasia'] != null){
+				$dadosAtualiza['nomeFantasia'] = $dadosCliente['nomeFantasia'];
+			}
+			if ($dadosCliente['telefone'] != $cliente_bd->telefone && $dadosCliente['telefone'] != null){
+				$dadosAtualiza['telefone'] = $dadosCliente['telefone'];
+			}
+			if ($dadosCliente['celular'] != $cliente_bd->celular && $dadosCliente['celular'] != null){
+				$dadosAtualiza['celular'] = $dadosCliente['celular'];
+			}
+			if ($dadosCliente['email'] != $cliente_bd->email && $dadosCliente['email'] != null){
+				$dadosAtualiza['email'] = $dadosCliente['email'];
+			}
+			if ($dadosCliente['cep'] != $cliente_bd->cep && $dadosCliente['cep'] != null){
+				$dadosAtualiza['cep'] = $dadosCliente['cep'];
+			}
+			if ($dadosCliente['rua'] != $cliente_bd->rua && $dadosCliente['rua'] != null){
+				$dadosAtualiza['rua'] = $dadosCliente['rua'];
+			}
+			if ($dadosCliente['numero'] != $cliente_bd->numero && $dadosCliente['numero'] != null){
+				$dadosAtualiza['numero'] = $dadosCliente['numero'];
+			}
+			if ($dadosCliente['complemento'] != $cliente_bd->complemento && $dadosCliente['complemento'] != null){
+				$dadosAtualiza['complemento'] = $dadosCliente['complemento'];
+			}
+			if ($dadosCliente['bairro'] != $cliente_bd->bairro && $dadosCliente['bairro'] != null){
+				$dadosAtualiza['bairro'] = $dadosCliente['bairro'];
+			}
+			if ($dadosCliente['cidade'] != $cliente_bd->cidade && $dadosCliente['cidade'] != null){
+				$dadosAtualiza['cidade'] = $dadosCliente['cidade'];
+			}
+			if ($dadosCliente['uf'] != $cliente_bd->uf && $dadosCliente['uf'] != null){
+				$dadosAtualiza['uf'] = $dadosCliente['uf'];
+			}
+
+
 			if(!empty($dadosAtualiza)){
-				$this->db->where('id',$dadosUsuario['id']);
-				$this->db->update('usuarios',$dadosAtualiza);
+				$this->db->where('id',$dadosCliente['id']);
+				$this->db->update('cliente',$dadosAtualiza);
 				return true;
 			}
 		}

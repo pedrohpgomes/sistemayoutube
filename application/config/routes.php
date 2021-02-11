@@ -64,6 +64,7 @@ $route['busca_usuario_perfil'] = 'home/busca_usuario_perfil';
 $route['lista_usuario'] = 'home/lista_usuario';
 $route['consulta_usuario'] = 'home/consulta_usuario';
 $route['cadastra_usuario'] = 'home/cadastra_usuario';
+$route['profile'] = 'home/profile';
 
 
 /*
@@ -97,6 +98,7 @@ $route['relatorio_produtos'] = 'relatorio/relatorio_produtos';
 $route['relatorio_pedidos'] = 'relatorio/relatorio_pedidos';
 
 /*
- *RELATORIOS
+ *AGENDA
  */
 $route['agenda'] = 'agenda/agenda';
+

@@ -204,14 +204,20 @@ class Cliente extends CI_Controller {
 			*/
 
 			if($this->input->post()){
+				$cliente['id'] = $this->input->post('id');
 				//if ($this->form_validation->run() == TRUE){
 					$cliente['cpf'] = $this->input->post('cpf');
-					if (!empty($cliente['cpf']){
+					if (!empty($cliente['cpf'])){
 						$cliente['nome'] = $this->input->post('nome');
+						$cliente['cnpj'] = null;
+						$cliente['razaoSocial'] = null;
+						$cliente['nomeFantasia'] = null;
 					} else {
 						$cliente['cnpj'] = $this->input->post('cnpj');
 						$cliente['razaoSocial'] = $this->input->post('razaoSocial');
 						$cliente['nomeFantasia'] = $this->input->post('nomeFantasia');
+						$cliente['nome'] = null;
+						$cliente['cpf'] = null;
 					}
 					$cliente['telefone'] = $this->input->post('telefone');
 					$cliente['celular'] = $this->input->post('celular');
